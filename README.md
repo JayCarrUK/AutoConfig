@@ -10,7 +10,7 @@ These steps make the assumption that you are using Maven to build your plugin, h
  4) Enjoy making use of AutoConfig in your plugin. An example setup can be seen below.
  
  ### Example
- ```
+ ```java
  public final class ExamplePlugin extends JavaPlugin {
     
     private ConfigurationLoader configurationLoader;
