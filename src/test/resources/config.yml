@@ -1,0 +1,5 @@
+# We went to use default value for this test hence the commented config option.
+# has-default-value: 5
+
+# This value should be used for the noDefaultValue field.
+no-default-value: 2
