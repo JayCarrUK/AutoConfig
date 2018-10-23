@@ -6,7 +6,7 @@ These steps make the assumption that you are using Maven to build your plugin, h
 
  1) Download a copy of the latest JAR file from the [releases](https://github.com/JayCarrUK/AutoConfig/releases).
  2) Install the JAR into your local Maven repository. A guide can be found [here](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html).
- 3) Add the repository to your 'pom.xml', ensuring that you use the Maven Shade Plugin to shade the resource.
+ 3) Add the repository to your `pom.xml`, ensuring that you use the Maven Shade Plugin to shade the resource.
  4) Enjoy making use of AutoConfig in your plugin. An example setup can be seen below.
  
  ### Example
