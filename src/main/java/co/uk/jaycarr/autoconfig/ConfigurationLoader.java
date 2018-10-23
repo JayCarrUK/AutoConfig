@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
  * @since 1.0-SNAPSHOT
  */
 public class ConfigurationLoader {
-
+    
     /**
      * The configuration used to retrieve and set values.
      */
@@ -35,14 +35,14 @@ public class ConfigurationLoader {
     }
 
     /**
-     * Loads the fields of the given object which are annotated
-     * with the {@link Value} annotation.
+     * Loads the fields annotated with the {@link Value} annotation
+     * within the given objects class.
      *
      * @param object the object to load values from
      * @throws ConfigurationException if no value(s) could be loaded
      * due to access reasons or no default values
      */
-    public void load(Object object) throws ConfigurationException {
+    public void load(Object object) {
         try {
             for (Field field : object.getClass().getDeclaredFields()) {
                 if (!field.isAnnotationPresent(Value.class)) {
@@ -70,14 +70,28 @@ public class ConfigurationLoader {
     }
 
     /**
-     * Saves the fields of the given object which are annotated
-     * with {@link Value} and writes them to the given file.
+     * Loads the fields annotated with the {@link Value} annotation
+     * within the given objects classes.
+     *
+     * @param objects the objects to load values from
+     * @throws ConfigurationException if no value(s) could be loaded
+     * due to access reasons or no default values
+     */
+    public void loadAll(Object... objects) {
+        for (Object object : objects) {
+            this.load(object);
+        }
+    }
+
+    /**
+     * Saves the fields annotated with the {@link Value} annotation
+     * within the given objects class and saves them to the file.
      *
      * @param object the object to save values from
      * @param file the file to save the configuration to
      * @throws ConfigurationException if a file I/O or field access issue occurs
      */
-    public void save(Object object, File file) throws ConfigurationException {
+    public void save(Object object, File file) {
         try {
             for (Field field : object.getClass().getDeclaredFields()) {
                 if (!field.isAnnotationPresent(Value.class)) {
@@ -99,13 +113,26 @@ public class ConfigurationLoader {
     }
 
     /**
-     * Saves the fields of the given object which are annotated
-     * with {@link Value} without handling file writing.
+     * Saves the fields annotated with the {@link Value} annotation
+     * within the given objects class without handling file writing.
      *
      * @param object the object to save values from
      * @throws ConfigurationException if a field access issue occurs
      */
-    public void save(Object object) throws ConfigurationException {
+    public void save(Object object) {
         this.save(object, null);
+    }
+
+    /**
+     * Saves the fields annotated with the {@link Value} annotation
+     * within the given objects classes without handling file writing.
+     *
+     * @param objects the objects to save values from
+     * @throws ConfigurationException if a field access issue occurs
+     */
+    public void saveAll(Object... objects) {
+        for (Object object : objects) {
+            this.save(object);
+        }
     }
 }

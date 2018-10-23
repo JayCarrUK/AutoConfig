@@ -19,7 +19,8 @@ public final class ConfigurationLoaderTest extends JavaPlugin {
         try {
             this.configurationLoader.load(this.configOptions);
         } catch (ConfigurationException e) {
-            this.getLogger().warning("Could not load config.");
+            this.getLogger().warning("Failed to load configuration, disabling plugin...");
+            this.getServer().getPluginManager().disablePlugin(this);
         }
 
         this.getLogger().info("hasDefaultValue (expected: 1) - " + this.configOptions.hasDefaultValue);

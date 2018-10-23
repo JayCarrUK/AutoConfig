@@ -32,10 +32,12 @@ These steps make the assumption that you are using Maven to build your plugin, h
         try {
             this.configurationLoader.load(this.configOptions);
         } catch (ConfigurationException e) {
-            this.getLogger().log(Level.WARNING, "Could not load config.", e);
+            this.getLogger().log(Level.WARNING, "Failed to load configuration, disabling plugin...", e);
+            // You might want to disable the plugin due to a missing configuration value.
+            this.getServer().getPluginManager().disablePlugin(this);
         }
         
-        // We can now use our configurable fields. You can then branch out and create a getter for our options to use it elsewhere.
+        // We can now use our configurable fields. We can then branch out and create a getter for our options to use it elsewhere.
         this.getLogger().info("Here is a configured value: " + this.configOptions.noDefaultValue);
     }
     
@@ -61,7 +63,7 @@ These steps make the assumption that you are using Maven to build your plugin, h
         @Value(path = "no-default-value")
         private int noDefaultValue;
 
-        // No default value is found. An ConfigurationException is thrown as this value will be null.
+        // No default value is found. A ConfigurationException is thrown as this value will be null.
         @Value(path = "null-default-value")
         private String nullDefaultValue;
     }
